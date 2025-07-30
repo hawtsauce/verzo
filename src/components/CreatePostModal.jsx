@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   PhotoIcon,
   VideoCameraIcon,
-  TagIcon,
   MusicalNoteIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -37,9 +36,6 @@ function CreatePostModal({ isOpen, onClose, user }) {
           </a>
           <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#52575e] text-white font-semibold transition-colors cursor-pointer hover:bg-[#677bc4]">
             <VideoCameraIcon className="w-6 h-6 text-red-300" /> video
-          </a>
-          <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#52575e] text-white font-semibold transition-colors cursor-pointer hover:bg-[#677bc4]">
-            <TagIcon className="w-6 h-6 text-purple-300" /> tags
           </a>
           <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#52575e] text-white font-semibold transition-colors cursor-pointer hover:bg-[#677bc4]">
             <MusicalNoteIcon className="w-6 h-6 text-blue-300" /> audio
