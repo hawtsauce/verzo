@@ -10,7 +10,6 @@ import {
   VideoCameraIcon,
   HandThumbUpIcon,
   ChatBubbleOvalLeftIcon,
-  TagIcon,
   PlusCircleIcon,
   EllipsisHorizontalIcon,
   ArrowPathRoundedSquareIcon,
@@ -305,7 +304,7 @@ function Home() {
                       <EllipsisHorizontalIcon className="w-6 h-6" />
                     </button>
                     {openPostId === post.id && (
-                      <div className="absolute bottom-full right-0 mb-2 flex w-40 flex-col gap-2 bg-[#40444b] p-2 rounded-lg">
+                      <div className="absolute bottom-full right-0 w-38 mb-2 flex flex-col gap-2 bg-[#40444b] p-2 rounded-lg">
                         <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-[#52575e] text-white font-semibold transition-colors cursor-pointer">
                           <LinkIcon className="w-5 h-5" /> Copy Link
                         </a>
