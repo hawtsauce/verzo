@@ -45,19 +45,6 @@
 
 ---
 
-## 🛠️ Tech Stack
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 18.0.0 | Frontend framework |
-| **Vite** | 5.0.0 | Build tool and dev server |
-| **Tailwind CSS** | 3.0.0 | Utility-first CSS framework |
-| **React Router** | 6.0.0 | Client-side routing |
-| **Heroicons** | 2.0.0 | Beautiful SVG icons |
-| **React Icons** | 4.0.0 | Additional icon library |
-
----
-
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -280,30 +267,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
-
-- **React Team** - For the amazing framework
-- **Vite Team** - For the fast build tool
-- **Tailwind CSS** - For the utility-first CSS framework
-- **Heroicons** - For the beautiful icons
-- **All Contributors** - For making this project better
-
----
-
-## 📞 Support
-
-- **Discord**: [Join our community](#)
-- **Email**: support@verzo.com
-- **Twitter**: [@verzo_app](#)
-
----
-
 <div align="center">
 
-**Made with ❤️ by the Verzo Team**
+**Made with ❤️ by [@hawtsauce](https://github.com/hawtsauce)**
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/verzo.svg?style=social&label=Star)](https://github.com/yourusername/verzo)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/verzo.svg?style=social&label=Fork)](https://github.com/yourusername/verzo)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/verzo.svg)](https://github.com/yourusername/verzo/issues)
+[![GitHub stars](https://img.shields.io/github/stars/hawtsauce/verzo.svg?style=social&label=Star)](https://github.com/hawtsauce/verzo)
+[![GitHub forks](https://img.shields.io/github/forks/hawtsauce/verzo.svg?style=social&label=Fork)](https://github.com/hawtsauce/verzo)
+[![GitHub issues](https://img.shields.io/github/issues/hawtsauce/verzo.svg)](https://github.com/hawtsauce/verzo/issues)
 
 </div>
