@@ -2,10 +2,6 @@
 
 import { useState } from 'react';
 import {
-  UserCircleIcon,
-  ChatBubbleLeftRightIcon,
-  UsersIcon,
-  Cog6ToothIcon,
   PhotoIcon,
   VideoCameraIcon,
   HandThumbUpIcon,
@@ -16,10 +12,10 @@ import {
   FlagIcon,
   LinkIcon,
   MusicalNoteIcon,
-  XMarkIcon,
-  Bars3Icon
+  XMarkIcon
 } from '@heroicons/react/24/outline';
-import { FaGithub } from 'react-icons/fa';
+import Sidebar from '../components/Sidebar';
+import Post from '../components/Post';
 
 const dummyPosts = [
   {
@@ -62,14 +58,6 @@ const dummyPosts = [
 ];
 
 const user = dummyPosts[0].user;
-
-const leftMenu = [
-  { name: 'profile', icon: UserCircleIcon },
-  { name: 'messages', icon: ChatBubbleLeftRightIcon },
-  { name: 'followings', icon: UsersIcon },
-  { name: 'settings', icon: Cog6ToothIcon },
-  { name: 'github', icon: FaGithub, link: 'https://github.com/' },
-];
 
 const rightOnline = [
   { name: 'emily', avatar: 'https://randomuser.me/api/portraits/women/65.jpg', username: 'emily' },
@@ -128,70 +116,17 @@ function Home() {
         </div>
       )}
 
-      {/* Mobile Header - Hidden on Desktop */}
-      <header className="md:hidden sticky top-0 z-30 bg-[#282b30] border-b border-[#40444b] p-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 rounded-lg bg-[#40444b] hover:bg-[#52575e] transition-colors"
-          >
-            <Bars3Icon className="w-6 h-6 text-gray-300" />
-          </button>
-          <img src="/logo.png" alt="Verzo Logo" className="h-8 w-auto" />
-        </div>
-        
-        <div className="flex items-center gap-3">
-          <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="p-2 rounded-lg bg-[#7289da] hover:bg-[#677bc4] transition-colors"
-          >
-            <PlusCircleIcon className="w-5 h-5 text-white" />
-          </button>
-        </div>
-      </header>
+      {/* Sidebar Component */}
+      <Sidebar 
+        user={user} 
+        isMenuOpen={isMenuOpen} 
+        setIsMenuOpen={setIsMenuOpen}
+        onCreatePost={() => setIsModalOpen(true)}
+        currentPage="home"
+      />
 
-      {/* Mobile Menu Dropdown - Hidden on Desktop */}
-      {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsMenuOpen(false)}>
-          <div className="fixed left-0 top-0 h-full w-64 bg-[#282b30] p-4 transform transition-transform">
-            <div className="flex flex-col items-center p-4 bg-[#40444b] rounded-lg mb-4">
-              <img src={user.avatar} alt={user.name} className="w-16 h-16 rounded-full border-4 border-[#202225] mb-3" />
-              <span className="font-bold text-lg text-white">{user.name}</span>
-              <span className="text-sm text-gray-400">@{user.username}</span>
-            </div>
-            <nav className="flex flex-col gap-2">
-              {leftMenu.map(({ name, icon: Icon, link }) => (
-                <a key={name} href={link || '#'} target={link ? "_blank" : "_self"} rel="noopener noreferrer" className="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-[#3a3c41] text-gray-300 font-semibold transition-colors cursor-pointer">
-                  <Icon className="w-6 h-6 text-gray-400" /> {name}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
-
-      {/* Desktop Layout - Hidden on Mobile */}
+      {/* Desktop Layout */}
       <div className="hidden md:flex flex-row">
-        {/* Floating Left Sidebar */}
-        <aside className="flex flex-col w-64 p-4 gap-4 fixed left-4 top-4 h-[calc(100vh-2rem)] z-20">
-          <div className="flex flex-col items-center p-4 bg-[#282b30] rounded-lg">
-            <img src={user.avatar} alt={user.name} className="w-20 h-20 rounded-full border-4 border-[#202225] mb-3" />
-            <span className="font-bold text-xl text-white">{user.name}</span>
-            <span className="text-sm text-gray-400">@{user.username}</span>
-          </div>
-          <nav className="flex flex-col gap-2 p-4 bg-[#282b30] rounded-lg flex-1">
-            {leftMenu.map(({ name, icon: Icon, link }) => (
-              <a key={name} href={link || '#'} target={link ? "_blank" : "_self"} rel="noopener noreferrer" className="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-[#3a3c41] text-gray-300 font-semibold transition-colors cursor-pointer">
-                <Icon className="w-6 h-6 text-gray-400" /> {name}
-              </a>
-            ))}
-              <a href="#" onClick={() => setIsModalOpen(true)} className="flex items-center gap-4 px-4 py-3 rounded-lg bg-[#5865f2] text-white font-semibold transition-colors cursor-pointer mt-auto">
-                <PlusCircleIcon className="w-6 h-6" /> create
-              </a>
-          </nav>
-        </aside>
-
         {/* Floating Right Sidebar */}
         <aside className="hidden lg:flex flex-col w-72 p-4 gap-4 fixed right-4 top-4 h-[calc(100vh-2rem)] z-20">
           <div className="p-4 bg-[#282b30] rounded-lg">
@@ -227,10 +162,10 @@ function Home() {
         </aside>
 
         {/* Desktop Main Feed */}
-        <main className="flex-1 flex flex-col items-center relative min-h-screen">
-          <div className="w-full max-w-2xl flex-1 pt-4 pb-10 space-y-6 overflow-y-auto">
+        <main className="flex-1 flex flex-col items-center relative min-h-screen pl-[17rem] pr-[19rem]">
+          <div className="w-full max-w-4xl flex-1 pt-4 pb-10 space-y-6 overflow-y-auto">
           <div className="flex justify-center my-6">
-                  <img src="/logo.png" alt="logo" className="w-48" />
+                  <img src="/logo.png" alt="Verzo Logo" className="w-48" />
               </div>
           {/* Post Prompt */}
           <div className="bg-[#282b30] rounded-lg p-4 flex flex-col gap-3">
@@ -258,70 +193,13 @@ function Home() {
               </div>
             </div>
             {dummyPosts.map(post => (
-              <div
-                key={post.id}
-                className="bg-[#282b30] rounded-lg p-6 flex flex-col gap-4"
-              >
-                <div className="flex items-center gap-4">
-                  <a href="#" className="flex items-center gap-4">
-                      <img
-                      src={post.user.avatar}
-                      alt={post.user.name}
-                      className="w-14 h-14 rounded-full"
-                      />
-                      <div>
-                      <div className="font-bold text-lg text-white">{post.user.name}</div>
-                      <div className="text-sm text-gray-400">@{post.user.username}</div>
-                      </div>
-                  </a>
-                  <div className="ml-auto text-xs text-gray-500">{post.date} &middot; {post.time}</div>
-                </div>
-                <div className="text-base leading-relaxed">
-                  {post.content.split(' ').map((word, index) => 
-                    word.startsWith('#') ? <a key={index} href="#" className="text-blue-400 hover:underline">{word}</a> : ` ${word} `
-                  )}
-                </div>
-                {post.image && <div className="rounded-lg overflow-hidden mt-2">
-                  <img
-                    src={post.image}
-                    alt="Post visual"
-                    className="w-full h-auto object-cover"
-                    draggable="false"
-                  />
-                </div>}
-                <div className="flex gap-4 mt-4 border-t border-gray-700 pt-4">
-                  <a href="#" className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer">
-                    <HandThumbUpIcon className="w-6 h-6" /> like
-                  </a>
-                  <a href="#" className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer">
-                    <ChatBubbleOvalLeftIcon className="w-6 h-6" /> comment
-                  </a>
-                  <a href="#" className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer">
-                    <ArrowPathRoundedSquareIcon className="w-6 h-6" /> share
-                  </a>
-                  <div className="relative">
-                    <button onClick={() => setOpenPostId(openPostId === post.id ? null : post.id)} className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer">
-                      <EllipsisHorizontalIcon className="w-6 h-6" />
-                    </button>
-                    {openPostId === post.id && (
-                      <div className="absolute bottom-full right-0 w-38 mb-2 flex flex-col gap-2 bg-[#40444b] p-2 rounded-lg">
-                        <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-[#52575e] text-white font-semibold transition-colors cursor-pointer">
-                          <LinkIcon className="w-5 h-5" /> Copy Link
-                        </a>
-                        <a href="#" className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-[#52575e] text-white font-semibold transition-colors cursor-pointer">
-                          <FlagIcon className="w-5 h-5" /> Report
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <Post key={post.id} post={post} user={post.user} />
             ))}
           </div>
         </main>
       </div>
 
-      {/* Mobile Main Feed - Hidden on Desktop */}
+      {/* Mobile Main Feed */}
       <main className="md:hidden flex-1 flex flex-col items-center relative min-h-screen">
         <div className="w-full max-w-2xl flex-1 pt-4 pb-20 space-y-4 px-4">
         {/* Post Prompt */}
@@ -352,64 +230,7 @@ function Home() {
             </div>
           </div>
           {dummyPosts.map(post => (
-            <div
-              key={post.id}
-              className="bg-[#282b30] rounded-lg p-4 flex flex-col gap-3"
-            >
-              <div className="flex items-center gap-3">
-                <a href="#" className="flex items-center gap-3">
-                    <img
-                    src={post.user.avatar}
-                    alt={post.user.name}
-                    className="w-12 h-12 rounded-full"
-                    />
-                    <div>
-                    <div className="font-bold text-white">{post.user.name}</div>
-                    <div className="text-sm text-gray-400">@{post.user.username}</div>
-                    </div>
-                </a>
-                <div className="ml-auto text-xs text-gray-500">{post.time}</div>
-              </div>
-              <div className="text-sm leading-relaxed">
-                {post.content.split(' ').map((word, index) => 
-                  word.startsWith('#') ? <a key={index} href="#" className="text-blue-400 hover:underline">{word}</a> : ` ${word} `
-                )}
-              </div>
-              {post.image && <div className="rounded-lg overflow-hidden mt-2">
-                <img
-                  src={post.image}
-                  alt="Post visual"
-                  className="w-full h-auto object-cover"
-                  draggable="false"
-                />
-              </div>}
-              <div className="flex gap-2 mt-3 border-t border-gray-700 pt-3">
-                <button className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer text-sm">
-                  <HandThumbUpIcon className="w-5 h-5" /> like
-                </button>
-                <button className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer text-sm">
-                  <ChatBubbleOvalLeftIcon className="w-5 h-5" /> comment
-                </button>
-                <button className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer text-sm">
-                  <ArrowPathRoundedSquareIcon className="w-5 h-5" /> share
-                </button>
-                <div className="relative">
-                  <button onClick={() => setOpenPostId(openPostId === post.id ? null : post.id)} className="flex items-center justify-center gap-2 flex-1 py-2 rounded-lg hover:bg-[#40444b] text-gray-300 font-semibold transition-colors cursor-pointer text-sm">
-                    <EllipsisHorizontalIcon className="w-5 h-5" />
-                  </button>
-                  {openPostId === post.id && (
-                    <div className="absolute bottom-full right-0 mb-2 flex flex-col gap-1 bg-[#40444b] p-2 rounded-lg">
-                      <a href="#" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#52575e] text-white font-semibold transition-colors cursor-pointer text-sm">
-                        <LinkIcon className="w-4 h-4" /> Copy Link
-                      </a>
-                      <a href="#" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#52575e] text-white font-semibold transition-colors cursor-pointer text-sm">
-                        <FlagIcon className="w-4 h-4" /> Report
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+            <Post key={post.id} post={post} user={post.user} compact={true} />
           ))}
         </div>
       </main>
