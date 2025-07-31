@@ -76,10 +76,15 @@ const userPosts = [
 ];
 
 function Profile() {
+  const [posts, setPosts] = useState(userPosts);
   const [openPostId, setOpenPostId] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('posts');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDeletePost = (postId) => {
+    setPosts(posts.filter(post => post.id !== postId));
+  };
 
   return (
     <div className="min-h-screen bg-[#1e1f22] text-gray-300">
@@ -232,8 +237,8 @@ function Profile() {
               
               <div className="p-6">
                 <div className="space-y-6">
-                  {userPosts.map(post => (
-                    <Post key={post.id} post={post} user={user} />
+                  {posts.map(post => (
+                    <Post key={post.id} post={post} user={user} onDelete={handleDeletePost} />
                   ))}
                 </div>
               </div>
@@ -316,8 +321,8 @@ function Profile() {
             
             <div className="p-4">
               <div className="space-y-4">
-                {userPosts.map(post => (
-                  <Post key={post.id} post={post} user={user} compact={true} />
+                {posts.map(post => (
+                  <Post key={post.id} post={post} user={user} compact={true} onDelete={handleDeletePost} />
                 ))}
               </div>
             </div>

@@ -6,20 +6,20 @@ import {
   Cog6ToothIcon,
   PlusCircleIcon,
   HomeIcon,
-  MapIcon,
+  MagnifyingGlassIcon,
+  BellIcon,
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { FaGithub } from 'react-icons/fa';
 
 const leftMenu = [
   { name: 'home', icon: HomeIcon, link: '/' },
   { name: 'profile', icon: UserCircleIcon, link: '/profile' },
   { name: 'messages', icon: ChatBubbleLeftRightIcon, link: '/messages' },
-  { name: 'explore', icon: MapIcon, link: '/explore' },
+  { name: 'search', icon: MagnifyingGlassIcon, link: '/search' },
   { name: 'followings', icon: UsersIcon, link: '/followings' },
   { name: 'settings', icon: Cog6ToothIcon, link: '/settings' },
-  { name: 'github', icon: FaGithub, link: 'https://github.com/' },
+  { name: 'notifications', icon: BellIcon, link: '/notifications' },
 ];
 
 function Sidebar({ user, isMenuOpen, setIsMenuOpen, onCreatePost, currentPage = 'home' }) {
@@ -38,7 +38,9 @@ function Sidebar({ user, isMenuOpen, setIsMenuOpen, onCreatePost, currentPage = 
         </div>
 
         <div className="flex items-center gap-3">
-          <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
+          <a href="/profile">
+            <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
+          </a>
           {onCreatePost && (
             <button
               onClick={onCreatePost}
@@ -63,8 +65,8 @@ function Sidebar({ user, isMenuOpen, setIsMenuOpen, onCreatePost, currentPage = 
             </button>
             <div className="flex flex-col items-center p-4 bg-[#40444b] rounded-lg mb-4">
               <img src={user.avatar} alt={user.name} className="w-16 h-16 rounded-full border-4 border-[#202225] mb-3" />
-              <span className="font-bold text-lg text-white">{user.name}</span>
-              <span className="text-sm text-gray-400">@{user.username}</span>
+              <span className="font-bold text-xl text-white">{user.name}</span>
+              <span className="text-base text-gray-400">@{user.username}</span>
             </div>
             <nav className="flex flex-col gap-2">
               {leftMenu.map(({ name, icon: Icon, link }) => (
@@ -79,7 +81,7 @@ function Sidebar({ user, isMenuOpen, setIsMenuOpen, onCreatePost, currentPage = 
                       : 'hover:bg-[#3a3c41] text-gray-300 font-semibold'
                   }`}
                 >
-                  <Icon className={`w-6 h-6 ${currentPage === name ? 'text-white' : 'text-gray-400'}`} /> {name}
+                  <Icon className={`w-6 h-6 ${currentPage === name ? 'text-white' : 'text-gray-400'}`} /> <span className="text-base">{name}</span>
                 </a>
               ))}
               {onCreatePost && (

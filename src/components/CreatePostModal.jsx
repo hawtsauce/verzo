@@ -10,7 +10,7 @@ function CreatePostModal({ isOpen, onClose, user }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
       <div className="bg-[#282b30] rounded-lg p-6 w-full max-w-2xl">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-white">create post</h2>
